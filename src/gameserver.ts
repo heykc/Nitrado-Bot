@@ -42,20 +42,13 @@ export class Gameserver {
     }
 
     /**
-     * Get all players
-     * @returns all players
+     * Get the number of players currently online.
+     * @returns the number of players online
      */
-    async getPlayers(): Promise<Player[]> {
-        return await (await this.request("/gameservers/games/players", "GET")).data.players as Promise<Player[]>;
-    }
+    async getOnlinePlayers(): Promise<Number> {
+        return await (await this.request("/gameservers", "GET")).data.gameserver.query.player_current as Promise<Number>;
+    }	
 
-    /**
-     * Get all online players
-     * @returns all online players
-     */
-    async getOnlinePlayers(): Promise<Player[]> {
-        return await (await this.getPlayers()).filter(e => e.online);
-    }
 
     /**
      * Make a request to the nitrado api
