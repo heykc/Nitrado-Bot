@@ -1,5 +1,4 @@
 import { Client, Intents, MessageEmbed } from 'discord.js';
-import { token, nitrado_token, nitrado_id } from '../config.json';
 import { Gameserver, Status } from './gameserver';
 
 import colors from 'colors';
@@ -16,7 +15,7 @@ const client = new Client({
             'REACTION'
         ]
 });
-const gameServer = new Gameserver(nitrado_id, nitrado_token)
+const gameServer = new Gameserver(process.env.NITRADO_ID as string, process.env.NITRADO_TOKEN as string)
 
 
 client.once('ready', async () => {
@@ -123,4 +122,4 @@ function getTime(): string {
     return colors.gray(`[${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}] `);
 }
 
-client.login(token);
+client.login(process.env.DISCORD_TOKEN as string);
